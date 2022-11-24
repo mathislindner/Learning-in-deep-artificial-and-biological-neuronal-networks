@@ -1,0 +1,30 @@
+Tutorial 5.2 Theory Questions
+
+
+Name:
+Student ID:
+Email:
+
+
+Question 3.1: When changing the output readings from mean membrane potential to mean number of spikes, what would you expect to happen wrt learning if we did not use the surrogate gradient?
+
+
+Answer: --- **Remark** - Answer should be less than 200 words. ---
+
+
+Question 3.2: In our current implementation, does the computation of the activation of a neuron in layer l+1 at time t occurs before or after the computation of the activation of a neuron in layer l at time t+1?
+
+
+Answer: --- **Remark** - Answer should be less than 200 words. ---
+
+
+
+
+
+
+
+
+
+
+
+
