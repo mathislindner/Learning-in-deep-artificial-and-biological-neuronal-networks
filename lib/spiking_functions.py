@@ -69,9 +69,9 @@ computes the regularization loss term
 #   lib/spiking_functions.py
 #   theory_question.txt
 
-# Student name :
-# Student ID   :
-# Email address:
+# Student name : Mathis Lindner
+# Student ID   : 17-943-960
+# Email address: mlindner@ethz.ch
 
 
 import torch
@@ -102,10 +102,10 @@ def derivative_hard_sigmoid(x):
        (torch.tensor): The derivative of the hard-sigmoid on x (type=float).
     
     """
-    raise NotImplementedError('TODO implement')
-    # deriv = ...
-
-    # return deriv
+    deriv = torch.zeros_like(x)
+    deriv[x >= 0] = 1
+    deriv[x >= 1] = 0
+    return deriv
 
 
 def spike_function(D):
@@ -192,11 +192,9 @@ def loss_on_spikes(S, T):
     Returns:
         (float): The cross entropy loss on the average of number of spikes.
     """
-    raise NotImplementedError('TODO implement')
-    # Z = ...
-    # cross_ent_loss = ...
-
-    # return cross_ent_loss
+    tmax = S.shape[1]
+    Z = torch.sum(S, dim=1) / tmax
+    return cross_entropy_loss(Z, T)
 
 
 def accuracy_on_spikes(S, T):
@@ -232,13 +230,7 @@ def accuracy_on_spikes(S, T):
         (float): The classification accuracy of the current batch.
 
     """
-
-    raise NotImplementedError('TODO implement')
-    # Z = ...
-    # Y = ...
-    # acc = ...
-
-    # return acc
+    return torch.mean((torch.argmax(torch.sum(S, dim=1), dim=1) == T).float())
 
 
 def spike_regularizer(spikes_list):
@@ -289,10 +281,14 @@ def spike_regularizer(spikes_list):
         (float): The regularization loss term.
 
     """
-
-    raise NotImplementedError('TODO implement')
-    # reg_loss = ...
-    # return reg_loss
+    #The first component sums all the spikes over all hidden layers, batch elements, timesteps and neurons
+    c1 = 0
+    c2 = 0
+    for spikes in spikes_list:
+        c1 += torch.sum(spikes)
+        c2 += torch.mean(torch.sum(spikes, dim=1)**2)
+    return c1 + c2
+    
 
 
 class SurrogateSpike(Function):
