@@ -1,23 +1,21 @@
 Tutorial 5.2 Theory Questions
 
 
-Name:
-Student ID:
-Email:
+Name: Mathis Lindner
+Student ID: 17-943-960
+Email: mlindner@ethz.ch
 
 
 Question 3.1: When changing the output readings from mean membrane potential to mean number of spikes, what would you expect to happen wrt learning if we did not use the surrogate gradient?
 
+We would have more trouble to backpropagate the error through the network, since the number of spikes is not necessarily an increasing function of the membrane potential.
 
-Answer: --- **Remark** - Answer should be less than 200 words. ---
 
 
 Question 3.2: In our current implementation, does the computation of the activation of a neuron in layer l+1 at time t occurs before or after the computation of the activation of a neuron in layer l at time t+1?
 
-
-Answer: --- **Remark** - Answer should be less than 200 words. ---
-
-
+We can observe in the spiking_layer.py file, that we "Compute hidden layer state at each time step" & since the function forward() "Computes the output activation of a spiking layer.":
+We can conclude that the computation of the activation of a neuron in layer l at time t+1 occurs before the computation of the activation of a neuron in layer l+1 at time t.
 
 
 
