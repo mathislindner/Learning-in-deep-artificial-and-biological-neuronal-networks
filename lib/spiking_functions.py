@@ -286,7 +286,8 @@ def spike_regularizer(spikes_list):
     c2 = 0
     for spikes in spikes_list:
         c1 += torch.sum(spikes)
-        c2 += torch.mean(torch.sum(spikes, dim=1)**2)
+        Mi = spikes.shape[2]
+        c2 += torch.sum(torch.sum(spikes, dim=(0,1))**2) / Mi
     return c1 + c2
     
 
