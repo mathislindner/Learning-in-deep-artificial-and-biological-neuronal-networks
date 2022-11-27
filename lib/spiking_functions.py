@@ -194,6 +194,7 @@ def loss_on_spikes(S, T):
     """
     tmax = S.shape[1]
     Z = torch.sum(S, dim=1) / tmax
+    T = T.long()
     return cross_entropy_loss(Z, T)
 
 
