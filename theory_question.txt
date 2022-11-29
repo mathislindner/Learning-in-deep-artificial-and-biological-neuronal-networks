@@ -8,9 +8,10 @@ Email: mlindner@ethz.ch
 
 Question 3.1: When changing the output readings from mean membrane potential to mean number of spikes, what would you expect to happen wrt learning if we did not use the surrogate gradient?
 
-***** NO CLUE IF THIS IS CORRECT *****
-Answer: We would have more trouble to backpropagate the error through the network, since the number of spikes is not necessarily an absolute indicator of the membrane potential which is the actual reason why a neuron fires. 
-This would make it harder to learn the correct weights.
+
+Answer: We cannot differentiate the error if we do not use a surrogate, which ultimately means that we would not be able to backpropagate the error. 
+Moreover, the number of spikes is not necessarily an absolute indicator of the membrane potential which is the actual reason why a neuron fires, so using it would not work as good as the potential. 
+This would make it harder  for the network to learn the correct weights.
 
 
 Question 3.2: In our current implementation, does the computation of the activation of a neuron in layer l+1 at time t occurs before or after the computation of the activation of a neuron in layer l at time t+1?
